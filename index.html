@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destiny's Sweet Treats</title>
+  <style>
+    :root{
+      --pink:#ff5fa2;
+      --pink-dark:#e83f8c;
+      --pink-soft:#ffd6e8;
+      --pink-bg:#ffe6f1;
+      --card:#fff7fb;
+      --text:#6b2147;
+      --muted:#8f5a73;
+      --shadow:0 14px 30px rgba(232,63,140,.18);
+      --border:1px solid rgba(232,63,140,.18);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.9), transparent 30%),
+        linear-gradient(180deg, #ffd7e8 0%, #ffeaf3 35%, #fff3f8 100%);
+      min-height:100vh;
+    }
+
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+
+    .top-drip{
+      height:90px;
+      background:linear-gradient(180deg, #ff6fb0 0%, #ff4f9a 100%);
+      position:relative;
+      overflow:hidden;
+      border-bottom-left-radius:28px;
+      border-bottom-right-radius:28px;
+      box-shadow:0 10px 25px rgba(232,63,140,.18);
+    }
+
+    .top-drip::before{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-18px;
+      height:60px;
+      background:
+        radial-gradient(circle at 20px 0, #ff4f9a 18px, transparent 19px) repeat-x;
+      background-size:40px 40px;
+      opacity:.95;
+    }
+
+    .container{
+      width:min(1180px, calc(100% - 24px));
+      margin:0 auto;
+    }
+
+    .page{
+      padding:18px 0 30px;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top:-42px;
+    }
+
+    .hero-card,
+    .about-card,
+    .section-card,
+    .summary-card,
+    .contact-strip{
+      background:rgba(255,255,255,.82);
+      backdrop-filter:blur(10px);
+      border:var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card{
+      padding:18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .logo-wrap{
+      display:grid;
+      place-items:center;
+      padding:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
+      border-radius:20px;
+      min-height:320px;
+      position:relative;
+    }
+
+    .logo-wrap img{
+      width:min(100%, 420px);
+      height:auto;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 18px rgba(232,63,140,.18));
+    }
+
+    .about-card{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .brand-title{
+      margin:0;
+      font-size:clamp(2rem, 4vw, 3.4rem);
+      line-height:.95;
+      color:var(--pink-dark);
+      font-weight:900;
+      text-align:center;
+    }
+
+    .brand-subtitle{
+      margin:8px 0 16px;
+      text-align:center;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:.82rem;
+    }
+
+    .about-box{
+      background:#fff;
+      border:1px solid rgba(232,63,140,.12);
+      border-radius:18px;
+      padding:18px;
+      line-height:1.7;
+      color:#6f3a57;
+    }
+
+    .contact-strip{
+      margin-top:14px;
+      padding:14px 16px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      text-align:center;
+    }
+
+    .contact-item{
+      padding:10px 8px;
+      border-radius:16px;
+      background:rgba(255,255,255,.7);
+      border:1px solid rgba(232,63,140,.08);
+      font-size:.92rem;
+      color:#7a4560;
+      font-weight:700;
+    }
+
+    .contact-item span{
+      display:block;
+      font-size:.76rem;
+      color:var(--pink-dark);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:4px;
+    }
+
+    .section{
+      margin-top:18px;
+    }
+
+    .section-header{
+      text-align:center;
+      margin:0 0 14px;
+      color:var(--pink-dark);
+      font-size:clamp(1.5rem, 3vw, 2.2rem);
+      font-weight:900;
+      letter-spacing:.04em;
+    }
+
+    .section-card{
+      padding:16px;
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .product{
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,245,250,.95));
+      border:1px solid rgba(232,63,140,.14);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 10px 20px rgba(232,63,140,.08);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .product-img{
+      aspect-ratio:1/1;
+      background:#ffe3ef;
+      overflow:hidden;
+    }
+
+    .product-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .product-body{
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1;
+    }
+
+    .product h3{
+      margin:0;
+      font-size:1rem;
+      line-height:1.2;
+      color:#7a2450;
+      text-align:center;
+      min-height:2.4em;
+    }
+
+    .price{
+      text-align:center;
+      font-weight:900;
+      color:var(--pink-dark);
+      font-size:1rem;
+    }
+
+    .qty{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin-top:auto;
+    }
+
+    .qty button{
+      width:30px;
+      height:30px;
+      border:none;
+      border-radius:8px;
+      background:var(--pink);
+      color:#fff;
+      font-size:1.1rem;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 6px 12px rgba(232,63,140,.18);
+    }
+
+    .qty button:hover{background:var(--pink-dark)}
+    .qty span{
+      min-width:28px;
+      text-align:center;
+      font-weight:800;
+      color:#7a2450;
+    }
+
+    .summary-wrap{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .summary-card{
+      padding:18px;
+    }
+
+    .summary-card h2{
+      margin:0 0 12px;
+      text-align:center;
+      color:var(--pink-dark);
+      font-size:1.4rem;
+    }
+
+    .summary-line{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0;
+      border-bottom:1px dashed rgba(232,63,140,.18);
+      font-weight:700;
+    }
+
+    .summary-line:last-child{border-bottom:none}
+    .subtotal{
+      font-size:1.1rem;
+      color:#7a2450;
+    }
+
+    .pickup{
+      margin-top:12px;
+    }
+
+    .pickup label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:800;
+      color:#7a2450;
+    }
+
+    .pickup textarea{
+      width:100%;
+      min-height:90px;
+      resize:vertical;
+      border-radius:16px;
+      border:1px solid rgba(232,63,140,.18);
+      padding:12px;
+      font:inherit;
+      outline:none;
+      background:#fff;
+      color:var(--text);
+    }
+
+    .pickup textarea:focus{
+      border-color:var(--pink);
+      box-shadow:0 0 0 3px rgba(255,95,162,.15);
+    }
+
+    .order-btn{
+      width:100%;
+      margin-top:14px;
+      border:none;
+      border-radius:16px;
+      padding:14px 18px;
+      background:linear-gradient(180deg, var(--pink) 0%, var(--pink-dark) 100%);
+      color:#fff;
+      font-size:1rem;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 12px 24px rgba(232,63,140,.22);
+    }
+
+    .order-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .footer{
+      text-align:center;
+      margin:18px 0 8px;
+      color:#a35b7b;
+      font-weight:800;
+      font-style:italic;
+    }
+
+    .small-note{
+      text-align:center;
+      color:#b06a88;
+      font-size:.85rem;
+      margin-top:4px;
+    }
+
+    @media (max-width: 1024px){
+      .hero{grid-template-columns:1fr}
+      .products{grid-template-columns:repeat(2,1fr)}
+      .contact-strip{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 640px){
+      .products{grid-template-columns:1fr}
+      .contact-strip{grid-template-columns:1fr}
+      .logo-wrap{min-height:240px}
+      .hero-card{padding:14px}
+      .about-card{padding:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="top-drip"></div>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-card">
+          <div class="logo-wrap">
+            <img src="Logo.png" alt="Destiny's Sweet Treats logo">
+          </div>
+        </div>
+
+        <div class="about-card">
+          <h1 class="brand-title">Destiny's Sweet Treats</h1>
+          <div class="brand-subtitle">Homemade with love, made for you</div>
+          <div class="about-box">
+            <strong>Meet the baker</strong><br>
+            Hi, I’m Destiny, the baker behind this business! I create fresh, homemade treats made with care and quality ingredients. Whether you’re celebrating a special occasion or simply satisfying a sweet craving, I’m dedicated to making delicious desserts you’ll love.
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-strip" aria-label="Business contact information">
+        <div class="contact-item"><span>Instagram</span>@destiny_sweettreats</div>
+        <div class="contact-item"><span>Phone</span>203-850-0503</div>
+        <div class="contact-item"><span>Pickup</span>Made to Order | Local Pickup</div>
+        <div class="contact-item"><span>Email</span>destinysweettreats@gmail.com</div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-header">Our Sweet Treats</h2>
+        <div class="section-card">
+          <div class="products" id="products"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="summary-card">
+          <h2>Your Order Summary</h2>
+          <div id="summaryList"></div>
+          <div class="summary-line subtotal">
+            <span>Subtotal</span>
+            <span id="subtotal">$0.00</span>
+          </div>
+
+          <div class="pickup">
+            <label for="pickupInstructions">Pickup Instructions:</label>
+            <textarea id="pickupInstructions" placeholder="Enter any pickup notes here..."></textarea>
+          </div>
+
+          <button class="order-btn" id="orderBtn">Place My Order ♥</button>
+        </div>
+      </section>
+
+      <div class="footer">Thank You!</div>
+      <div class="small-note">You’re supporting a small business ♥</div>
+    </div>
+  </main>
+
+  <script>
+    const products = [
+      { name: "Strawberry Shortcake Cookies", price: 2.00, image: "strawberry-shortcake-Cookies.jpeg" },
+      { name: "Oreo Red Velvet Cookies", price: 2.00, image: "Oreo-Red-velvet-Cookies.jpeg" },
+      { name: "Cookies Monster Cookie", price: 2.00, image: "Cookies-monster-Cookie.jpeg" },
+      { name: "Chocolate Chip Cookies", price: 2.00, image: "Chocolate-Chip-Cookies.jpeg" },
+      { name: "Fruity Pebble Rice Crispy", price: 3.00, image: "Fruity-pebble-Rice-crispys.jpeg" },
+      { name: "Cookies & Cream Rice Crispy", price: 3.00, image: "Cookies-and-cream-Rice-crispy.jpeg" },
+      { name: "Brownies", price: 2.00, image: "Brownie.jpeg" },
+      { name: "Brookies", price: 3.00, image: "Brookie.jpeg" },
+      { name: "Banana Pudding Cups", price: 5.00, image: "Banana-pudding-cups.jpeg" }
+    ];
+
+    const quantities = {};
+    const productsEl = document.getElementById("products");
+    const summaryList = document.getElementById("summaryList");
+    const subtotalEl = document.getElementById("subtotal");
+
+    function formatMoney(value){
+      return `$${value.toFixed(2)}`;
+    }
+
+    function renderProducts(){
+      productsEl.innerHTML = products.map((product, index) => {
+        quantities[index] = quantities[index] || 0;
+        return `
+          <article class="product">
+            <div class="product-img">
+              <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="product-body">
+              <h3>${product.name}</h3>
+              <div class="price">${formatMoney(product.price)}</div>
+              <div class="qty">
+                <button type="button" onclick="changeQty(${index}, -1)">−</button>
+                <span id="qty-${index}">${quantities[index]}</span>
+                <button type="button" onclick="changeQty(${index}, 1)">+</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderSummary(){
+      const items = products
+        .map((product, index) => ({ ...product, qty: quantities[index] || 0 }))
+        .filter(item => item.qty > 0);
+
+      if(items.length === 0){
+        summaryList.innerHTML = `<div class="summary-line"><span>No items selected</span><span>$0.00</span></div>`;
+        subtotalEl.textContent = "$0.00";
+        return;
+      }
+
+      let subtotal = 0;
+      summaryList.innerHTML = items.map(item => {
+        const lineTotal = item.price * item.qty;
+        subtotal += lineTotal;
+        return `
+          <div class="summary-line">
+            <span>${item.name} × ${item.qty}</span>
+            <span>${formatMoney(lineTotal)}</span>
+          </div>
+        `;
+      }).join("");
+
+      subtotalEl.textContent = formatMoney(subtotal);
+    }
+
+    function changeQty(index, delta){
+      quantities[index] = Math.max(0, (quantities[index] || 0) + delta);
+      document.getElementById(`qty-${index}`).textContent = quantities[index];
+      renderSummary();
+    }
+
+    document.getElementById("orderBtn").addEventListener("click", () => {
+      const items = products
+        .map((product, index) => ({ ...product, qty: quantities[index] || 0 }))
+        .filter(item => item.qty > 0);
+
+      const notes = document.getElementById("pickupInstructions").value.trim();
+      let message = "Order Summary:%0A";
+
+      if(items.length === 0){
+        alert("Please select at least one item.");
+        return;
+      }
+
+      items.forEach(item => {
+        message += `${item.name} x${item.qty} - ${formatMoney(item.price * item.qty)}%0A`;
+      });
+
+      message += `%0ASubtotal: ${subtotalEl.textContent}%0A`;
+      if(notes){
+        message += `%0APickup Instructions: ${encodeURIComponent(notes)}`;
+      }
+
+      const phone = "2038500503";
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    });
+
+    renderProducts();
+    renderSummary();
+  </script>
+</body>
+</html>
